@@ -107,7 +107,8 @@ function mouseReleased() {
     face = get(xstart+3, ystart+3, mx-xstart-6, my-ystart-6);
     face.resize(96,96);
     face.loadPixels();
-    
+    pixarr = [];
+	
     for (let i = 0; i < face.pixels.length; i++) {
     	if (((i+1) % 4) != 0) {
     		pixarr.push(face.pixels[i]/255);
