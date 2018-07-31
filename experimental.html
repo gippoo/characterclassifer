@@ -13,7 +13,8 @@
 
 <script>
 async function init() {
-	tf.loadmodel
+	shokugeki = await tf.loadModel('https://gippoo.github.io/characterclassifier/shokugeki.json');
+}
 
 init();
 	
@@ -105,7 +106,6 @@ function mouseReleased() {
     
     face = get(xstart+3, ystart+3, mx-xstart-6, my-ystart-6);
     face.resize(96,96);
-    image(face, 0, 0);
     face.loadPixels();
     
     for (let i = 0; i < face.pixels.length; i++) {
