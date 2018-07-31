@@ -3,6 +3,7 @@
 <head>
 <script src="https://cdnjs.cloudflare.com/ajax/libs/p5.js/0.6.1/p5.js"></script>
 <script src="https://cdnjs.cloudflare.com/ajax/libs/p5.js/0.6.1/addons/p5.dom.min.js"></script>
+<script src="https://cdn.jsdelivr.net/npm/@tensorflow/tfjs@0.12.0"> </script>
 </head>
 <body>
 <h2>Load an image and place a box around the face. Some images may not load due to cross-origin restrictions</h2>
@@ -11,6 +12,11 @@
 </div>
 
 <script>
+async function init() {
+	tf.loadmodel
+
+init();
+	
 var xstart;
 var ystart;
 var mx;
@@ -104,16 +110,35 @@ function mouseReleased() {
     
     for (let i = 0; i < face.pixels.length; i++) {
     	if (((i+1) % 4) != 0) {
-    		pixarr.push(face.pixels[i]);
+    		pixarr.push(face.pixels[i]/255);
         }
     }
     
-    console.log(pixarr);
-    console.log(pixarr.length);
+    tf.tidy(() {
+    	var inputs = tf.tensor4d(pixarr,[1,96,96,3]);
+    	var prediction = shokugeki.predict(inputs);
+    	var result = prediction.squeeze().argMax().dataSync();
+    	var resultchar;
     
+    	if (result == 0) {
+    		resultchar = "Alice";
+    	}
+    
+    	else if (result == 1) {
+    		resultchar = "Erina";
+    	}
+    
+    	else {
+    		resultchar = "Soma";
+    	}
+		
+    	document.getElementById("result").innerHTML = resultchar + " " + "(" + prediction.squeeze().dataSync()[result] +")";
+     }); 
 }
 
 </script>
-	
+
+<p id="result"></p>
+
 </body>
 </html>
