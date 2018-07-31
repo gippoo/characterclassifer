@@ -1,0 +1,144 @@
+<!DOCTYPE html>
+<html>
+<head>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/p5.js/0.6.1/p5.js"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/p5.js/0.6.1/addons/p5.dom.min.js"></script>
+<script src="https://cdn.jsdelivr.net/npm/@tensorflow/tfjs@0.12.0"> </script>
+</head>
+<body>
+<h2>Load an image and place a box around the face. Some images may not load due to cross-origin restrictions</h2>
+	
+<div id="canholder">
+</div>
+
+<script>
+async function init() {
+	shokugeki = await tf.loadModel('https://gippoo.github.io/characterclassifier/shokugeki.json');
+}
+
+init();
+	
+var xstart;
+var ystart;
+var mx;
+var my;
+var face;
+var pixarr = [];
+
+function setup() {
+	input = createInput();
+  	button = createButton('Submit');
+    	var canv = createCanvas(250, 300);
+	canv.parent("canholder");
+    	input.elt.placeholder = "Paste URL Here";
+	background(255);
+    
+    	input.size(300, 15)
+    	button.mousePressed(show);
+}
+var uploadedimg;
+function show() {
+	link = input.value();
+    	uploadedimg = loadImage(link, function(img) {
+    	resizeCanvas(img.width, img.height);
+    	image(img, 0, 0);
+  	});
+}
+  
+function mousePressed() {
+	xstart = mouseX;
+    	ystart = mouseY;
+}
+function mouseDragged() {
+	mx = mouseX;
+	my = mouseY;
+	
+	if (xstart > width) {
+		xstart = width;
+	}
+	
+	if (xstart < 0) {
+		xstart = 0;
+	}
+	
+	if (ystart > height) {
+		ystart = height;
+	}
+	
+	if (ystart < 0) {
+		ystart = 0;
+	}
+	
+	if (mouseX > width) {
+		mx = width;
+	}
+	
+	if (mouseX < 0) {
+		mx = 0;
+	}
+	
+	if (mouseY > height) {
+		my = height;
+	}
+	
+	if (mouseY < 0) {
+		my = 0;
+	}
+	
+    	image(uploadedimg, 0, 0);
+	noFill();
+    	stroke('red');
+    	strokeWeight(3);
+	rect(xstart, ystart, mx-xstart, my-ystart);
+    
+}
+
+function mouseReleased() {
+	if (xstart > mouseX) {
+    	mx = xstart;
+    	xstart = mouseX;
+    }
+    
+    if (ystart > mouseY) {
+    	my = ystart;
+    	ystart = mouseY;
+    }
+    
+    face = get(xstart+3, ystart+3, mx-xstart-6, my-ystart-6);
+    face.resize(96,96);
+    face.loadPixels();
+    
+    for (let i = 0; i < face.pixels.length; i++) {
+    	if (((i+1) % 4) != 0) {
+    		pixarr.push(face.pixels[i]/255);
+        }
+    }
+    
+    tf.tidy(() {
+    	var inputs = tf.tensor4d(pixarr,[1,96,96,3]);
+    	var prediction = shokugeki.predict(inputs);
+    	var result = prediction.squeeze().argMax().dataSync();
+    	var resultchar;
+    
+    	if (result == 0) {
+    		resultchar = "Alice";
+    	}
+    
+    	else if (result == 1) {
+    		resultchar = "Erina";
+    	}
+    
+    	else {
+    		resultchar = "Soma";
+    	}
+		
+    	document.getElementById("result").innerHTML = resultchar + " " + "(" + prediction.squeeze().dataSync()[result] +")";
+     }); 
+}
+
+</script>
+
+<p id="result"></p>
+
+</body>
+</html>
