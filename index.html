@@ -1,0 +1,53 @@
+<!DOCTYPE html>
+<html>
+<head>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/p5.js/0.6.1/p5.js"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/p5.js/0.6.1/addons/p5.dom.min.js"></script>
+</head>
+<body>
+
+<script>
+var xstart;
+var ystart;
+
+function setup() {
+	input = createInput();
+  	button = createButton('submit image url');
+    var canv = createCanvas(250, 300);
+    canv.parent("canholder");
+	background(255);
+    
+    input.size(300, 15)
+    button.mousePressed(show);
+}
+
+var uploadedimg;
+
+function show() {
+	link = input.value();
+    uploadedimg = loadImage(link, function(img) {
+    resizeCanvas(img.width, img.height);
+    image(img, 0, 0);
+  });
+}
+  
+function mousePressed() {
+	xstart = mouseX;
+    ystart = mouseY;
+}
+
+function mouseDragged() {
+	clear();
+    image(uploadedimg, 0, 0);
+	noFill();
+    stroke('red')
+    strokeWeight(4)
+	rect(xstart, ystart, mouseX-xstart, mouseY-ystart);
+}
+
+
+</script>
+<div id="canholder">
+</div>
+</body>
+</html>
