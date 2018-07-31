@@ -16,7 +16,7 @@
 
 <script>
 async function init() {
-	shokugeki = await tf.loadModel('https://gippoo.github.io/characterclassifier/shokugeki.json');
+	shokugeki = await tf.loadModel('https://gippoo.github.io/characterclassifier/shokugeki2.json');
 }
 
 init();
@@ -27,6 +27,11 @@ var mx;
 var my;
 var face;
 var pixarr = [];
+var charlist = ["Alice",
+		"Erina",
+		"Megumi",
+		"Soma"
+	       ];
 
 function setup() {
 	input = createInput();
@@ -122,21 +127,8 @@ function mouseReleased() {
     	var inputs = tf.tensor4d(pixarr,[1,96,96,3]);
     	var prediction = shokugeki.predict(inputs);
     	var result = prediction.squeeze().argMax().dataSync();
-    	var resultchar;
-    
-    	if (result == 0) {
-    		resultchar = "Alice";
-    	}
-    
-    	else if (result == 1) {
-    		resultchar = "Erina";
-    	}
-    
-    	else {
-    		resultchar = "Soma";
-    	}
 		
-    	document.getElementById("result").innerHTML = resultchar + " " + "(" + prediction.squeeze().dataSync()[result] +")";
+    	document.getElementById("result").innerHTML = charlist[result] + " " + "(" + prediction.squeeze().dataSync()[result] +")";
      }); 
 	
 	console.log(tf.memory().numTensors)
