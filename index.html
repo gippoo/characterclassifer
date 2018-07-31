@@ -114,7 +114,7 @@ function mouseReleased() {
         }
     }
     
-    tf.tidy(() {
+    tf.tidy(() => {
     	var inputs = tf.tensor4d(pixarr,[1,96,96,3]);
     	var prediction = shokugeki.predict(inputs);
     	var result = prediction.squeeze().argMax().dataSync();
