@@ -34,15 +34,17 @@ var charlist = ["Alice",
 	       ];
 
 function setup() {
-	input = createInput();
-  	button = createButton('Submit');
+	var inp = createInput();
+  	var b1 = createButton('Submit');
     	var canv = createCanvas(250, 300);
 	canv.parent("canholder");
-    	input.elt.placeholder = "Paste URL Here";
+	inp.parent("things");
+	b1.parent("things");
+    	inp.elt.placeholder = "Paste URL Here";
 	background(255);
     
-    	input.size(300, 15)
-    	button.mousePressed(show);
+    	inp.size(300, 15)
+    	b1.mousePressed(show);
 }
 var uploadedimg;
 function show() {
@@ -137,6 +139,7 @@ function mouseReleased() {
 </script>
 
 <p id="result"></p>
+<p id="things"></p>
 
 </body>
 <h3>
