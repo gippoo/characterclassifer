@@ -45,23 +45,39 @@ function mousePressed() {
 }
 
 function mouseDragged() {
-	mx = mouseX
-	my = mouseY
+	mx = mouseX;
+	my = mouseY;
+	
+	if (xstart > width) {
+		xstart = width;
+	}
+	
+	if (xstart < 0) {
+		xstart = 0;
+	}
+	
+	if (ystart > height) {
+		ystart = height;
+	}
+	
+	if (ystart < 0) {
+		ystart = 0;
+	}
 	
 	if (mouseX > width) {
-		mx = width
+		mx = width;
 	}
 	
 	if (mouseX < 0) {
-		mx = 0
+		mx = 0;
 	}
 	
 	if (mouseY > height) {
-		my = height
+		my = height;
 	}
 	
 	if (mouseY < 0) {
-		my = 0
+		my = 0;
 	}
 	
     	image(uploadedimg, 0, 0);
