@@ -17,35 +17,35 @@ var ystart;
 function setup() {
 	input = createInput();
   	button = createButton('Submit');
-    var canv = createCanvas(250, 300);
-    canv.parent("canholder");
-    input.elt.placeholder = "Paste URL Here";
+    	var canv = createCanvas(250, 300);
+	canv.parent("canholder");
+    	input.elt.placeholder = "Paste URL Here";
 	background(255);
     
-    input.size(300, 15)
-    button.mousePressed(show);
+    	input.size(300, 15)
+    	button.mousePressed(show);
 }
 
 var uploadedimg;
 
 function show() {
 	link = input.value();
-    uploadedimg = loadImage(link, function(img) {
-    resizeCanvas(img.width, img.height);
-    image(img, 0, 0);
-  });
+    	uploadedimg = loadImage(link, function(img) {
+    	resizeCanvas(img.width, img.height);
+    	image(img, 0, 0);
+  	});
 }
   
 function mousePressed() {
 	xstart = mouseX;
-    ystart = mouseY;
+    	ystart = mouseY;
 }
 
 function mouseDragged() {
-    image(uploadedimg, 0, 0);
+    	image(uploadedimg, 0, 0);
 	noFill();
-    stroke('blue')
-    strokeWeight(3)
+    	stroke('blue');
+    	strokeWeight(3);
 	rect(xstart, ystart, mouseX-xstart, mouseY-ystart);
 }
 
