@@ -57,11 +57,12 @@ function show() {
   	});
 }
   
-function mousePressed() {
+function touchStarted() {
 	xstart = mouseX;
     	ystart = mouseY;
+	return false;
 }
-function mouseDragged() {
+function touchMoved() {
 	if (xstart < width && xstart > 0 && ystart < height && ystart > 0) {
 	    
 	mx = mouseX;
@@ -106,9 +107,11 @@ function mouseDragged() {
 	rect(xstart, ystart, mx-xstart, my-ystart);
 	rectmade = true;
 	}
+	
+	return false;
 }
 
-function mouseReleased() {
+function touchEnded() {
 	if (rectmade) {
 	
 	if (xstart > mouseX) {
@@ -144,6 +147,8 @@ function mouseReleased() {
 	
 	rectmade = false;
 	}
+	
+	return false;
 }
 
 </script>
