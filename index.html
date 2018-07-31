@@ -135,6 +135,8 @@ function mouseReleased() {
 		
     	document.getElementById("result").innerHTML = resultchar + " " + "(" + prediction.squeeze().dataSync()[result] +")";
      }); 
+	
+	console.log(tf.memory().numTensors)
 }
 
 </script>
