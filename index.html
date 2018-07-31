@@ -39,15 +39,16 @@ function show() {
 function mousePressed() {
 	xstart = mouseX;
     	ystart = mouseY;
-	console.log(xstart, ystart);
 }
 
 function mouseDragged() {
+	if (mouseX < canv.width && mouseY < canv.height) {
     	image(uploadedimg, 0, 0);
 	noFill();
-    	stroke('blue');
+    	stroke('red');
     	strokeWeight(3);
 	rect(xstart, ystart, mouseX-xstart, mouseY-ystart);
+	}
 }
 
 
