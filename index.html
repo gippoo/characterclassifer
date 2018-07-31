@@ -14,6 +14,9 @@
 var xstart;
 var ystart;
 
+var mx;
+var my;
+
 function setup() {
 	input = createInput();
   	button = createButton('Submit');
@@ -42,13 +45,31 @@ function mousePressed() {
 }
 
 function mouseDragged() {
-	if (mouseX < width && mouseY < height && mouseX > 0 && mouseY > 0) {
+	mx = mouseX
+	my = mouseY
+	
+	if (mouseX > width) {
+		mx = width
+	}
+	
+	if (mouseX < 0) {
+		mx = 0
+	}
+	
+	if (mouseY > height) {
+		my = height
+	}
+	
+	if (mouseY < 0) {
+		my = 0
+	}
+	
     	image(uploadedimg, 0, 0);
 	noFill();
     	stroke('red');
     	strokeWeight(3);
-	rect(xstart, ystart, mouseX-xstart, mouseY-ystart);
-	}
+	rect(xstart, ystart, mx-xstart, my-ystart);
+
 }
 
 
