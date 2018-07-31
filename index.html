@@ -26,6 +26,7 @@ var xstart;
 var ystart;
 var mx;
 var my;
+var rectmade = false;
 var face;
 var pixarr = [];
 var charlist = ["Alice",
@@ -61,6 +62,8 @@ function mousePressed() {
     	ystart = mouseY;
 }
 function mouseDragged() {
+	if (xstart < width && xstart > 0 && ystart < height && ystart > 0) {
+	    
 	mx = mouseX;
 	my = mouseY;
 	
@@ -101,10 +104,13 @@ function mouseDragged() {
     	stroke('red');
     	strokeWeight(3);
 	rect(xstart, ystart, mx-xstart, my-ystart);
-    
+	rectmade = true;
+	}
 }
 
 function mouseReleased() {
+	if (rectmade) {
+	
 	if (xstart > mouseX) {
     	mx = xstart;
     	xstart = mouseX;
@@ -135,13 +141,16 @@ function mouseReleased() {
      }); 
 	
 	console.log(tf.memory().numTensors)
+	
+	rectmade = false;
+	}
 }
 
 </script>
 
 <p id="result"></p>
 <p id="things"></p>
-<p>Sample URL: https://cdn.inquisitr.com/wp-content/uploads/2016/10/Shokugeki-no-Soma.jpg</p>
+<p>Sample URL: https://myanimelist.cdn-dena.com/images/anime/5/76426.jpg</p>
 
 </body>
 <h3>
