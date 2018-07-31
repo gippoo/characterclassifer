@@ -5,7 +5,7 @@
 <script src="https://cdnjs.cloudflare.com/ajax/libs/p5.js/0.6.1/addons/p5.dom.min.js"></script>
 </head>
 <body>
-<h2>Load an image and place a box around the face. Some images may not load due to cross-origin restirctions</h2>
+<h2>Load an image and place a box around the face. Some images may not load due to cross-origin restrictions</h2>
 	
 <div id="canholder">
 </div>
@@ -16,6 +16,7 @@ var ystart;
 var mx;
 var my;
 var face;
+var pixarr = [];
 
 function setup() {
 	input = createInput();
@@ -97,6 +98,19 @@ function mouseReleased() {
     }
     
     face = get(xstart+3, ystart+3, mx-xstart-6, my-ystart-6);
+    face.resize(96,96);
+    image(face, 0, 0);
+    face.loadPixels();
+    
+    for (let i = 0; i < face.pixels.length; i++) {
+    	if (((i+1) % 4) != 0) {
+    		pixarr.push(face.pixels[i]);
+        }
+    }
+    
+    console.log(pixarr);
+    console.log(pixarr.length);
+    
 }
 
 </script>
