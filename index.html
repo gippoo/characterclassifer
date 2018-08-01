@@ -48,7 +48,9 @@ function setup() {
     	inp.size(300, 15)
     	b1.mousePressed(show);
 }
+	
 var uploadedimg;
+	
 function show() {
 	link = inp.value();
     	uploadedimg = loadImage(link, function(img) {
@@ -152,7 +154,8 @@ function touchEnded() {
 
 <p id="result"></p>
 <p id="things"></p>
-<p>Sample URL: https://raw.githubusercontent.com/gippoo/characterclassifier/master/sample.jpg</p>
+<p>Sample URLs: https://raw.githubusercontent.com/gippoo/characterclassifier/master/sample.jpg</p>
+<p>https://raw.githubusercontent.com/gippoo/characterclassifier/master/sample2.jpg</p>
 
 </body>
 </html>
