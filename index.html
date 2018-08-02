@@ -61,6 +61,7 @@ function show() {
     	resizeCanvas(img.width, img.height);
     	image(img, 0, 0);
 	imgloaded = true;
+	document.getElementById("result").innerHTML = "Image Loaded";
   	}, function() {
 	document.getElementById("result").innerHTML = "Failed to Load";
 	imgloaded = false;
