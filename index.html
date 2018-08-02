@@ -63,6 +63,7 @@ function show() {
 	imgloaded = true;
   	}, function() {
 	document.getElementById("result").innerHTML = "Failed to Load";
+	imgloaded = false;
 	});
 }
   
