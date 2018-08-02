@@ -36,6 +36,7 @@ var charlist = ["Alice",
 		"Mito",
 		"Soma"
 	       ];
+var imgloaded = false;
 
 function setup() {
 	inp = createInput();
@@ -59,6 +60,7 @@ function show() {
     	uploadedimg = loadImage(link, function(img) {
     	resizeCanvas(img.width, img.height);
     	image(img, 0, 0);
+	imgloaded = true;
   	});
 }
   
@@ -68,7 +70,7 @@ function touchStarted() {
 }
 	
 function touchMoved() {
-	if (xstart < width && xstart > 0 && ystart < height && ystart > 0) {
+	if (imgloaded && xstart < width && xstart > 0 && ystart < height && ystart > 0) {
 	    
 	mx = mouseX;
 	my = mouseY;
