@@ -61,7 +61,9 @@ function show() {
     	resizeCanvas(img.width, img.height);
     	image(img, 0, 0);
 	imgloaded = true;
-  	});
+  	}, function() {
+	document.getElementById("result").innerHTML = "Failed to Load";
+	});
 }
   
 function touchStarted() {
