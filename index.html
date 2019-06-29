@@ -10,21 +10,86 @@
 <script src="https://cdn.jsdelivr.net/npm/@tensorflow/tfjs@0.12.0"> </script>
 	
 <style>
-  body {
-    background-color: #303030;
-    color: white;
-    font-family: "Trebuchet MS";
-  }
+    body {
+        background-color: #303030;
+        color: white;
+        font-family: "Trebuchet MS";
+    }
+  
+    a:link {
+        color: white;
+    }
+    a:visited {
+        color: white;
+    }  
+    a:hover {
+        color: #8bb6f9;
+    }
+    
+    a.header:link {
+        color: #bfd8ff;
+    }
+    a.header:visited {
+        color: #bfd8ff;
+    }  
+    a.header:hover {
+        color: #6da6ff;
+    }
+    
+    div.header {
+        position: absolute;
+        left: 0;
+        top: 0;
+        right: 0;
+        height: 54px;
+        background-color: #4a70ad;
+    }
+    
+    div.title_text {
+        position: absolute;
+        left: 10px;
+        top: 10px;
+        font-size: 24px;
+    }
+    
+    div.content {
+        position: relative;
+        left: 0;
+        top: 54px;
+        right: 0;
+        font-size: 16px;
+    }
+
 </style>
 
 </head>
+
+
 <body>
+<div class="header">
+    <div class="title_text">
+    	<a class="header" href="https://gippoo.github.io/" style="text-decoration:none;">Gary Ip</a> | 
+        <a class="header" href="https://gippoo.github.io/resume/" style="text-decoration:none;">Resume</a> | 
+        <a class="header" href="https://github.com/gippoo" style="text-decoration:none;">GitHub</a> | 
+        <a class="header" href="https://www.linkedin.com/in/gary-ip27/" style="text-decoration:none;">LinkedIn</a>
+    </div>
+</div>
+
+<div class="content">
 <h1>Shokugeki Character Classifer</h1>
 <h2>Load an image then click and drag to place a box around the character's head.</h2>
 <h3>Some images may not load due to cross-origin restrictions. If the image doesn't load in a few seconds, try another one</h3>
 <h4>There may be issues on a mobile device. Currently has support for Soma, Erina, Alice, Megumi, Mito, Hisako.</h4>
 	
 <div id="canholder">
+</div>
+
+
+<p id="result"></p>
+<p id="things"></p>
+<p>Sample URLs: https://gippoo.github.io/characterclassifier/sample.jpg</p>
+<p>https://gippoo.github.io/characterclassifier/sample2.jpg</p>
+
 </div>
 
 <script>
@@ -173,11 +238,6 @@ function touchEnded() {
 }
 
 </script>
-
-<p id="result"></p>
-<p id="things"></p>
-<p>Sample URLs: https://gippoo.github.io/characterclassifier/sample.jpg</p>
-<p>https://gippoo.github.io/characterclassifier/sample2.jpg</p>
 
 </body>
 </html>
